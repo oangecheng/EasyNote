@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/rl"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:background="@color/WHITE_COMMON">
+                android:layout_width="@dimen/fl_width"
+                android:layout_height="@dimen/size_height"
+                android:background="@color/BLUE_COMMON">
 
     <TextView
         android:id="@+id/tv_title"
@@ -11,10 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="@dimen/size_interval"
         android:text="我是测试的"
-        android:textColor="@color/BLACK_COMMON"
-        android:textSize="20dp"/>
+        android:textColor="@color/WHITE_COMMON"
+        android:textSize="@dimen/size_text"/>
 
     <TextView
         android:id="@+id/tv_count"
@@ -22,9 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="@dimen/size_interval"
         android:text="6"
-        android:textColor="@color/BLACK_COMMON"
-        android:textSize="20dp"/>
+        android:textColor="@color/WHITE_COMMON"
+        android:textSize="@dimen/size_text"/>
 
 </RelativeLayout>

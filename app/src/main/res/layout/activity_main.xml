@@ -2,26 +2,87 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main"
-    android:orientation="vertical"
-    android:background="@color/WHITE_COMMON"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/WHITE_COMMON"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:background="@color/BLUE_COMMON"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="@dimen/size_height"
+        android:background="@color/BLUE_COMMON">
 
-        <Spinner
-            android:id="@+id/sp_selectNote"
+        <LinearLayout
+            android:id="@+id/ll_category"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-        </Spinner>
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size_interval"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="全部备忘录"
+                android:textColor="@color/WHITE_COMMON"
+                android:textSize="@dimen/size_text"/>
+
+            <TextView
+                android:id="@+id/iv_category"
+                android:layout_width="@dimen/size_text"
+                android:layout_height="@dimen/size_text"
+                android:layout_marginLeft="@dimen/size_interval"
+                android:background="@mipmap/ic_launcher"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/size_interval"
+            android:text="更多"
+            android:textColor="@color/WHITE_COMMON"
+            android:textSize="@dimen/size_text"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lv_note"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tv_add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/size_interval_large"
+            android:layout_marginRight="@dimen/size_interval_large"
+            android:background="@mipmap/ic_launcher"/>
 
 
+        <FrameLayout
+            android:id="@+id/fl_category"
+            android:layout_width="@dimen/fl_width"
+            android:layout_height="wrap_content">
+
+            <ListView
+                android:id="@+id/lv_category"
+                android:layout_width="@dimen/fl_width"
+                android:layout_height="wrap_content">
+            </ListView>
+        </FrameLayout>
+
+    </RelativeLayout>
 
 
 </LinearLayout>

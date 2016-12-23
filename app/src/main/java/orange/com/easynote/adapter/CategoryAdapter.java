@@ -7,19 +7,19 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
-import orange.com.easynote.adapter.item.ItemSpinner;
+import orange.com.easynote.adapter.item.ItemCategory;
 import orange.com.easynote.enity.CategoryInfo;
 
 /**
  * Created by Orange on 2016/12/22.
  */
 
-public class SpinnerAdapter extends BaseAdapter {
+public class CategoryAdapter extends BaseAdapter {
 
     private List<CategoryInfo> categoryInfoList;
     private Context context;
 
-    public SpinnerAdapter(Context context, List<CategoryInfo> categoryInfoList) {
+    public CategoryAdapter(Context context, List<CategoryInfo> categoryInfoList) {
         this.categoryInfoList = categoryInfoList;
         this.context = context;
     }
@@ -44,16 +44,16 @@ public class SpinnerAdapter extends BaseAdapter {
 
         CategoryInfo info = categoryInfoList.get(i);
 
-        ItemSpinner itemSpinner;
+        ItemCategory itemCategory;
 
         if (view == null) {
-            itemSpinner = new ItemSpinner(context);
+            itemCategory = new ItemCategory(context);
         } else {
-            itemSpinner = (ItemSpinner) view;
+            itemCategory = (ItemCategory) view;
         }
-        itemSpinner.bind(info, i);
-        itemSpinner.setTag(info);
-        return itemSpinner;
+        itemCategory.bind(info, i);
+        itemCategory.setTag(info);
+        return itemCategory;
 
     }
 }

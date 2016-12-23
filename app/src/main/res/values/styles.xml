@@ -7,5 +7,20 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    
+    <style name="AddNoteText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/WHITE_COMMON</item>
+        <item name="android:textSize">@dimen/size_text</item>
+    </style>
+
+    <style name="Line">
+        <item name="android:layout_height">@dimen/size_line</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">@dimen/size_interval</item>
+        <item name="android:layout_marginRight">@dimen/size_interval</item>
+        <item name="android:background">@color/DEFINED_GREY</item>
+    </style>
 
 </resources>
