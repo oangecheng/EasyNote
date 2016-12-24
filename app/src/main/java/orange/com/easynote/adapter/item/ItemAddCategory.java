@@ -11,39 +11,36 @@ import orange.com.easynote.R;
 import orange.com.easynote.enity.CategoryInfo;
 
 /**
- * Created by Orange on 2016/12/22.
+ * Created by Orange on 2016/12/24.
  */
 
-public class ItemCategory extends RelativeLayout {
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
-    @BindView(R.id.tv_count)
-    TextView tvCount;
-    @BindView(R.id.rl)
-    RelativeLayout rl;
+public class ItemAddCategory extends RelativeLayout {
 
-    public ItemCategory(Context context) {
+    @BindView(R.id.tv_category_title)
+    TextView tvTitle;
+
+    public ItemAddCategory(Context context) {
         super(context);
         init();
     }
 
-    public ItemCategory(Context context, AttributeSet attrs) {
+    public ItemAddCategory(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public ItemCategory(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ItemAddCategory(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
     private void init() {
-        inflate(getContext(), R.layout.item_category, this);
+        inflate(getContext(), R.layout.item_add_category, this);
         ButterKnife.bind(this);
     }
 
     public void bind(final CategoryInfo info) {
         tvTitle.setText(info.getCategoryTitle());
-        tvCount.setText(info.getNoteNum() + "");
     }
+
 }

@@ -14,11 +14,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 
 import orange.com.easynote.R;
 import orange.com.easynote.database.DatabaseFactory;
+import orange.com.easynote.utils.AppPublicString;
+import orange.com.easynote.utils.TimeFormatUtil;
 
 public class AddNoteActivity extends BaseActivity {
     private TextView tvSave;
@@ -41,6 +44,7 @@ public class AddNoteActivity extends BaseActivity {
 
         tvAddImage.setOnClickListener(new AddImage());
         tvSave.setOnClickListener(new SaveNote());
+        tvAddCategory.setOnClickListener(new AddCategory());
 
     }
 
@@ -51,6 +55,9 @@ public class AddNoteActivity extends BaseActivity {
         etTitle = (EditText) findViewById(R.id.et_title);
         etContent = (EditText) findViewById(R.id.et_content);
         tvSave = (TextView) findViewById(R.id.tv_save);
+        tvAddCategory = (TextView)findViewById(R.id.tv_add_category);
+        tvSave =(TextView)findViewById(R.id.tv_save);
+
     }
 
 
@@ -62,18 +69,36 @@ public class AddNoteActivity extends BaseActivity {
         }
     }
 
+    private class AddCategory implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(AddNoteActivity.this, AddCategoryActivity.class);
+            startActivity(intent);
+        }
+    }
+
     private class SaveNote implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+
             String title = etTitle.getText().toString();
             String content = etContent.getText().toString();
-            String time = timeFormat(System.currentTimeMillis());
+            String time = TimeFormatUtil.formatTimeStampString(AddNoteActivity.this, System.currentTimeMillis());
             String image = imagePath;
             String voice = "";
-            String category = "新建";
+            String category = getIntent().getStringExtra(AppPublicString.CATEGORY);
             int collect = 0;
 
-            DatabaseFactory.getNoteTable(AddNoteActivity.this).insertNote(title, content, time, image, voice, category, collect);
+            boolean success = DatabaseFactory.getNoteTable(AddNoteActivity.this).
+                    insertNote(title, content, time, image, voice, category, collect);
+
+            if (success){
+                Intent intent = new Intent(AddNoteActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }else {
+                Toast.makeText(AddNoteActivity.this, "新建日记失败", Toast.LENGTH_SHORT).show();
+            }
 
         }
     }
@@ -98,9 +123,4 @@ public class AddNoteActivity extends BaseActivity {
         ivNote.setImageBitmap(bitmap);
     }
 
-    private String timeFormat(long time) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date(time);
-        return format.format(date);
-    }
 }

@@ -6,5 +6,7 @@
     <color name="BLACK_COMMON">#333333</color>
     <color name="WHITE_COMMON">#ffffff</color>
     <color name="BLUE_COMMON">#388ecb</color>
+    <color name="BLUE_FOCUS">#2276aa</color>
     <color name="DEFINED_GREY">#dcdcdc</color>
+    <color name="BLACK_HINT">#999999</color>
 </resources>

@@ -15,6 +15,7 @@ import java.util.List;
 
 import orange.com.easynote.R;
 import orange.com.easynote.adapter.CategoryAdapter;
+import orange.com.easynote.adapter.NoteAdapter;
 import orange.com.easynote.database.DatabaseFactory;
 import orange.com.easynote.enity.CategoryInfo;
 import orange.com.easynote.enity.NoteInfo;
@@ -31,10 +32,20 @@ public class MainActivity extends BaseActivity {
     private TextView tvAddNote;
 
     //查询按钮
-    private TextView tvSelect;
+    private TextView tvSave;
 
-    private List<CategoryInfo> list = new ArrayList<>();
+    //note的listview
+    private ListView lvNote;
+
+    //类别的list
+    private List<CategoryInfo> categoryInfoList = new ArrayList<>();
+    //日记的list
+    private List<NoteInfo> noteInfoList = new ArrayList<>();
+
+    //category的adapter
     private CategoryAdapter cateAdapter;
+    //note的adapter
+    private NoteAdapter noteAdapter;
 
     //变量，控制FrameLayout是否显示
     private boolean showFrameLayout = false;
@@ -44,46 +55,53 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        setAdapter();
 
-
-        tvSelect = (TextView)findViewById(R.id.tv_more);
-
-        tvSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                List<NoteInfo> info = new ArrayList<NoteInfo>();
-                info = DatabaseFactory.getNoteTable(MainActivity.this).getNoteList("444");
-                String i = info.get(0).getTitle();
-            }
-        });
 
         tvCategory.setOnClickListener(new CategoryClickListener());
         tvAddNote.setOnClickListener(new AddNoteClickListener());
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initList();
     }
 
     private void initView() {
         lvCategory = (ListView) findViewById(R.id.lv_category);
         tvCategory = (TextView) findViewById(R.id.tv_category);
         frameLayout = (FrameLayout) findViewById(R.id.fl_category);
-        tvAddNote = (TextView)findViewById(R.id.tv_add_btn);
+        tvAddNote = (TextView) findViewById(R.id.tv_add_btn);
+        lvNote = (ListView) findViewById(R.id.lv_note);
         frameLayout.setVisibility(View.GONE);
         initList();
     }
 
+
     private void initList() {
-        CategoryInfo info = new CategoryInfo("1233", 1, 1);
-        list.add(info);
-        CategoryInfo info1 = new CategoryInfo("4566", 1, 1);
-        list.add(info1);
+
+        //类别的list
+        categoryInfoList = DatabaseFactory.getCategoryTable(MainActivity.this).getCategoryList();
+
+        //日记的list
+        noteInfoList = DatabaseFactory.getNoteTable(MainActivity.this).getNoteList(0, "");
+
+        setAdapter();
     }
 
     private void setAdapter() {
-        cateAdapter = new CategoryAdapter(MainActivity.this, list);
+
+        //category
+        cateAdapter = new CategoryAdapter(MainActivity.this, categoryInfoList);
         lvCategory.setAdapter(cateAdapter);
         lvCategory.setOnItemClickListener(new CategoryItemClick());
+
+        //note
+        noteAdapter = new NoteAdapter(MainActivity.this, noteInfoList);
+        lvNote.setAdapter(noteAdapter);
+
+
     }
 
     //查看备忘录分类按钮响应事件
@@ -105,12 +123,13 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             Toast.makeText(MainActivity.this, i + "", Toast.LENGTH_SHORT).show();
-            tvCategory.setText(list.get(i).getCategoryTitle());
+            tvCategory.setText(categoryInfoList.get(i).getCategoryTitle());
+
         }
     }
 
     //添加备忘录按钮响应
-    private class AddNoteClickListener implements View.OnClickListener{
+    private class AddNoteClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(MainActivity.this, AddNoteActivity.class);
@@ -118,6 +137,17 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+
+    //长按删除note
+    private class DeleteNote implements AdapterView.OnItemLongClickListener{
+        @Override
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+
+            return false;
+        }
+    }
 
 
 }

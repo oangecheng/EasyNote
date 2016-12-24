@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import orange.com.easynote.adapter.item.ItemNote;
 import orange.com.easynote.enity.NoteInfo;
 
 /**
@@ -15,7 +16,7 @@ import orange.com.easynote.enity.NoteInfo;
  */
 public class NoteAdapter extends BaseAdapter {
 
-    private List<NoteInfo> list = new ArrayList<>();
+    private List<NoteInfo> list;
     private Context context;
 
     public NoteAdapter(Context context, List<NoteInfo> list) {
@@ -35,11 +36,23 @@ public class NoteAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return list.get(i).getId();
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        return null;
+
+        NoteInfo info = list.get(i);
+        ItemNote itemNote;
+        if (view==null){
+            itemNote = new ItemNote(context);
+        }else {
+            itemNote = (ItemNote)view;
+        }
+
+        itemNote.bind(info);
+        itemNote.setTag(info);
+
+        return itemNote;
     }
 }

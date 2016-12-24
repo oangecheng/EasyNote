@@ -8,9 +8,9 @@ public class CategoryInfo {
 
     private String categoryTitle;
     private int noteNum;
-    private int categoryID;
+    private long categoryID;
 
-    public CategoryInfo(String categoryTitle, int noteNum, int categoryID) {
+    public CategoryInfo(String categoryTitle, int noteNum, long categoryID) {
         this.categoryTitle = categoryTitle;
         this.noteNum = noteNum;
         this.categoryID = categoryID;
@@ -32,7 +32,7 @@ public class CategoryInfo {
         this.noteNum = noteNum;
     }
 
-    public int getCategoryID() {
+    public long getCategoryID() {
         return categoryID;
     }
 

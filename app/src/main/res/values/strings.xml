@@ -7,5 +7,9 @@
         <item>分类</item>
     </string-array>
 
-    <string name="tip">全部</string>
+    <string name="no_content">您未输入任何内容</string>
+    <string name="contains_backspace">不能包含空格</string>
+    <string name="category_exist">分类已存在</string>
+    <string name="add_success">添加成功</string>
+    <string name="add_failed">添加失败</string>
 </resources>

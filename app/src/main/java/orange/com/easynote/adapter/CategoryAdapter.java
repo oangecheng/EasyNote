@@ -51,7 +51,7 @@ public class CategoryAdapter extends BaseAdapter {
         } else {
             itemCategory = (ItemCategory) view;
         }
-        itemCategory.bind(info, i);
+        itemCategory.bind(info);
         itemCategory.setTag(info);
         return itemCategory;
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_category"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="orange.com.easynote.activity.AddCategoryActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_0"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_height"
+        android:background="@color/BLUE_COMMON">
+        <TextView
+           style="@style/AddNoteText"
+            android:text="选择分类"
+            android:layout_centerInParent="true"/>
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/size_interval"
+            android:background="@drawable/text_click_style">
+
+            <TextView
+                style="@style/AddNoteText"
+                android:id="@+id/tv_sure"
+                android:text="确定"
+                android:background="@color/BLUE_COMMON"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_add_category"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_0"
+        android:layout_above="@+id/rl_1">
+    </ListView>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_height"
+        android:background="@drawable/text_click_style"
+        android:layout_alignParentBottom="true">
+
+       <TextView
+           style="@style/AddNoteText"
+           android:id="@+id/tv_add_category_1"
+           android:text="点击添加分类"
+           android:layout_centerInParent="true"
+           android:layout_marginTop="@dimen/size_interval"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

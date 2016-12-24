@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/WHITE_COMMON">
+
+        <TextView
+            android:id="@+id/tv_note_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/size_interval"
+            android:layout_marginTop="@dimen/size_interval"
+            android:text="我是你的"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_note_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_note_title"
+            android:layout_marginTop="@dimen/size_interval"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/size_interval"
+            android:textSize="16sp"
+            android:textColor="@color/BLACK_COMMON"
+            android:text="测试数据41514551561444455565648446"
+            android:maxLength="20"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_note_content"
+            android:layout_marginTop="@dimen/size_interval"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/size_interval"
+            android:layout_marginBottom="@dimen/size_interval">
+
+            <TextView
+                android:id="@+id/tv_note_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/BLACK_HINT"
+                android:text="测试数据"/>
+
+            <ImageView
+                android:id="@+id/iv_note_voice"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="@dimen/size_interval"
+                android:background="@mipmap/voice"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_note_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/size_interval"
+            android:layout_marginTop="@dimen/size_interval"
+            android:layout_marginBottom="@dimen/size_interval"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
