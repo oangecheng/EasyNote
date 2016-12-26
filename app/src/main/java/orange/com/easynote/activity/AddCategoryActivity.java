@@ -1,12 +1,9 @@
 package orange.com.easynote.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -19,10 +16,10 @@ import orange.com.easynote.R;
 import orange.com.easynote.adapter.AddCategoryAdapter;
 import orange.com.easynote.database.DatabaseFactory;
 import orange.com.easynote.enity.CategoryInfo;
-import orange.com.easynote.utils.AppPublicString;
 import orange.com.easynote.utils.DialogUtil;
+import orange.com.easynote.utils.SharedPreferenceUtil;
 
-public class AddCategoryActivity extends Activity {
+public class AddCategoryActivity extends BaseActivity {
 
     //添加category的按钮
     private RelativeLayout tvAddCategory;
@@ -30,6 +27,8 @@ public class AddCategoryActivity extends Activity {
     private TextView tvSure;
     //显示category的listview
     private ListView lvCategory;
+    //返回
+    private TextView tvBack;
 
     private List<CategoryInfo> categoryInfoList;
 
@@ -46,7 +45,9 @@ public class AddCategoryActivity extends Activity {
 
         tvAddCategory.setOnClickListener(new AddCategory());
         tvSure.setOnClickListener(new SureListener());
+        tvBack.setOnClickListener(new BackClick());
     }
+
 
     @Override
     protected void onResume() {
@@ -56,9 +57,10 @@ public class AddCategoryActivity extends Activity {
 
     //初始化界面控件
     private void initView() {
-        tvAddCategory = (RelativeLayout)findViewById(R.id.rl_1);
+        tvAddCategory = (RelativeLayout) findViewById(R.id.rl_1);
         lvCategory = (ListView) findViewById(R.id.lv_add_category);
         tvSure = (TextView) findViewById(R.id.tv_sure);
+        tvBack = (TextView) findViewById(R.id.tv_add_category_back);
 
         initList();
     }
@@ -84,8 +86,8 @@ public class AddCategoryActivity extends Activity {
         View layout = inflater.inflate(R.layout.dialog_edit, null);
 
         final EditText editText = (EditText) layout.findViewById(R.id.et_category_title);
-        Button btnSure = (Button) layout.findViewById(R.id.btn_sure);
-        Button btnCancel = (Button) layout.findViewById(R.id.btn_cancel);
+        TextView btnSure = (TextView) layout.findViewById(R.id.tv_dialog_sure);
+        TextView btnCancel = (TextView) layout.findViewById(R.id.tv_dialog_cancel);
 
         final DialogUtil dialog = new DialogUtil(AddCategoryActivity.this, layout, true);
 
@@ -106,6 +108,8 @@ public class AddCategoryActivity extends Activity {
                     success = DatabaseFactory.getCategoryTable(AddCategoryActivity.this).insertCategory(title);
                     if (success) {
                         Toast.makeText(AddCategoryActivity.this, R.string.add_success, Toast.LENGTH_SHORT).show();
+                        //刷新数据
+                        initList();
                     } else {
                         Toast.makeText(AddCategoryActivity.this, R.string.add_failed, Toast.LENGTH_SHORT).show();
                     }
@@ -137,12 +141,17 @@ public class AddCategoryActivity extends Activity {
     private class SureListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(AddCategoryActivity.this, AddNoteActivity.class);
-            if (selectedCategory.equals("")) {
-                selectedCategory = "未分类";
+            if (SharedPreferenceUtil.setCategory(AddCategoryActivity.this, selectedCategory)) {
+                finish();
             }
-            intent.putExtra(AppPublicString.CATEGORY, selectedCategory);
-            startActivity(intent);
+        }
+    }
+
+    //返回按钮响应事件
+    private class BackClick implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            finish();
         }
     }
 
@@ -150,7 +159,20 @@ public class AddCategoryActivity extends Activity {
     private class ItemCLick implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            selectedCategory = categoryInfoList.get(i).getCategoryTitle();
+            CategoryInfo info = categoryInfoList.get(i);
+            selectedCategory = info.getCategoryTitle();
+
+            if (info.isSelected()){
+                info.setSelected(false);
+            }else {
+                for (CategoryInfo in: categoryInfoList){
+                    in.setSelected(false);
+                }
+                info.setSelected(true);
+            }
+
+            adapter.notifyDataSetChanged();
+
         }
     }
 

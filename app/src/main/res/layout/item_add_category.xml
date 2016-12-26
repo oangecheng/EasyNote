@@ -2,18 +2,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_height">
+        android:layout_height="@dimen/size_height"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/radio"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="@dimen/size_interval"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/unselected"/>
 
         <TextView
             android:id="@+id/tv_category_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
+            android:layout_toRightOf="@+id/radio"
             android:layout_marginLeft="@dimen/size_interval_large"
             android:textColor="@color/BLACK_COMMON"
+            android:text="我的啊的"
             android:textSize="@dimen/size_text"/>
 
     </RelativeLayout>

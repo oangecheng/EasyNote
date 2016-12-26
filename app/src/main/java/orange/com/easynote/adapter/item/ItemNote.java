@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -15,6 +16,8 @@ import butterknife.ButterKnife;
 import orange.com.easynote.R;
 import orange.com.easynote.enity.CategoryInfo;
 import orange.com.easynote.enity.NoteInfo;
+import orange.com.easynote.utils.CommonFunction;
+import orange.com.easynote.utils.TimeFormatUtil;
 
 /**
  * Created by Orange on 2016/12/24.
@@ -67,10 +70,15 @@ public class ItemNote extends LinearLayout {
         }
 
         tvNoteContent.setText(info.getContent());
-        tvNoteTime.setText(info.getTime());
+
+        tvNoteTime.setText(TimeFormatUtil.formatTimeStampString(getContext(), Long.parseLong(info.getTime())));
+
+
         if (!info.getImage().equals("")){
-            Bitmap bitmap = BitmapFactory.decodeFile(info.getImage());
-            ivNoteImage.setImageBitmap(bitmap);
+            ivNoteImage.setVisibility(View.VISIBLE);
+            CommonFunction.showImage(getContext(), ivNoteImage, info.getImage());
+        }else {
+            ivNoteImage.setVisibility(View.GONE);
         }
         if (info.getVoice().equals("")){
             ivNoteVoice.setVisibility(View.GONE);

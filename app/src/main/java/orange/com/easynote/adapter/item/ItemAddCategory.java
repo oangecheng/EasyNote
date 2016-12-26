@@ -2,6 +2,7 @@ package orange.com.easynote.adapter.item;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,8 @@ public class ItemAddCategory extends RelativeLayout {
 
     @BindView(R.id.tv_category_title)
     TextView tvTitle;
+    @BindView(R.id.radio)
+    ImageView ivRadio;
 
     public ItemAddCategory(Context context) {
         super(context);
@@ -41,6 +44,11 @@ public class ItemAddCategory extends RelativeLayout {
 
     public void bind(final CategoryInfo info) {
         tvTitle.setText(info.getCategoryTitle());
+        if (info.isSelected()){
+            ivRadio.setBackgroundResource(R.mipmap.selected);
+        }else {
+            ivRadio.setBackgroundResource(R.mipmap.unselected);
+        }
     }
 
 }

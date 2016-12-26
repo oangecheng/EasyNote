@@ -6,13 +6,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/WHITE_COMMON"
     tools:context="orange.com.easynote.activity.AddCategoryActivity">
 
     <RelativeLayout
-        android:id="@+id/rl_0"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size_height"
-        android:background="@color/BLUE_COMMON">
+        style="@style/bar_style"
+        android:id="@+id/rl_0">
+
+        <TextView
+            style="@style/back"
+            android:id="@+id/tv_add_category_back"/>
+
         <TextView
            style="@style/AddNoteText"
             android:text="选择分类"
@@ -41,6 +45,9 @@
         android:id="@+id/lv_add_category"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/size_interval"
+        android:layout_marginRight="@dimen/size_interval"
+
         android:layout_below="@+id/rl_0"
         android:layout_above="@+id/rl_1">
     </ListView>

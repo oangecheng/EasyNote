@@ -59,31 +59,39 @@ public class NoteTable extends Database {
     }
 
 
+    public int deleteNote(long id) {
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        return database.delete(NoteEntry.TABLE_NAME, NoteEntry._ID + "=? ", new String[]{id + ""});
+    }
+
+
     //根据不同的模式获取note的数据
     public List<NoteInfo> getNoteList(int mode, String category) {
         List<NoteInfo> list = new ArrayList<>();
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
         try {
             Cursor cursor = null;
-            switch (mode){
+            switch (mode) {
                 case 0:
                     cursor = database.query(
                             //查哪个表
                             NoteEntry.TABLE_NAME,
                             //查哪些些东西
-                            new String[]{NoteEntry._ID, NoteEntry.NOTE_TITLE, NoteEntry.NOTE_CONTENT, NoteEntry.NOTE_TIME, NoteEntry.NOTE_IMAGE, NoteEntry.NOTE_VOICE, NoteEntry.NOTE_CATEGORY, NoteEntry.NOTE_COLLECT},
+                            null,
                             //根据什么查
-                            null, null, null, null, null);
+                            null, null, null, null, NoteEntry._ID + " desc");
                     break;
                 case 1:
                     cursor = database.query(
                             //查哪个表
                             NoteEntry.TABLE_NAME,
                             //查哪些些东西
-                            new String[]{NoteEntry._ID, NoteEntry.NOTE_TITLE, NoteEntry.NOTE_CONTENT, NoteEntry.NOTE_TIME, NoteEntry.NOTE_IMAGE, NoteEntry.NOTE_VOICE, NoteEntry.NOTE_CATEGORY, NoteEntry.NOTE_COLLECT},
+                            null,
                             //根据什么查
                             NoteEntry.NOTE_CATEGORY + "=?", new String[]{category},
                             null, null, null);
+                    break;
+                default:
                     break;
 
             }
@@ -112,19 +120,23 @@ public class NoteTable extends Database {
 
     /**
      * 查询每个类别note的数量
-     * @param mode  0代表查询收藏的，1代表根据类别查询
+     *
+     * @param mode     0代表查询收藏的，1代表根据类别查询
      * @param category
      * @return
      */
-    public int getCountByCategory(int mode, String category){
+    public int getCountByCategory(int mode, String category) {
 
         int count = 0;
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
         try {
             Cursor cursor = null;
-            switch (mode){
+            switch (mode) {
                 case 0:
-                    cursor = database.query(NoteEntry.TABLE_NAME, new String[]{NoteEntry.NOTE_COLLECT}, NoteEntry.NOTE_COLLECT+"=?", new String[]{"1"}, null,null,null);
+                    cursor = database.query(
+                            NoteEntry.TABLE_NAME,
+                            new String[]{NoteEntry._ID},
+                            null, null, null, null, null);
                     break;
                 case 1:
                     cursor = database.query(
@@ -134,6 +146,13 @@ public class NoteTable extends Database {
                             new String[]{NoteEntry.NOTE_CATEGORY},
                             //根据什么查
                             NoteEntry.NOTE_CATEGORY + "=?", new String[]{category},
+                            null, null, null);
+                    break;
+                case 2:
+                    cursor = database.query(
+                            NoteEntry.TABLE_NAME,
+                            new String[]{NoteEntry.NOTE_COLLECT},
+                            NoteEntry.NOTE_COLLECT + "=?", new String[]{String.valueOf(0)},
                             null, null, null);
                     break;
                 default:

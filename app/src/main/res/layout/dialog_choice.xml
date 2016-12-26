@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+        style="@style/dialog"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_delete_note"
+            android:layout_marginTop="@dimen/size_interval_large"
+            android:textColor="@color/BLUE_COMMON"
+            android:textSize="@dimen/size_text"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/tv_dialog_deleteNote_sure"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/tv_2"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/size_height"
+            android:layout_marginLeft="@dimen/size_interval_large"
+            android:layout_marginBottom="@dimen/size_interval_large"
+            android:text="@string/dialog_delete"
+            android:textColor="@color/BLUE_COMMON"
+            android:textSize="@dimen/size_text"
+            android:gravity="center"
+            android:background="@drawable/shape_blueframe_whitebackground"/>
+
+        <TextView
+            android:id="@+id/tv_dialog_deleteNote_cancel"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/tv_2"
+            android:layout_marginTop="@dimen/size_height"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/size_interval_large"
+            android:layout_marginBottom="@dimen/size_interval_large"
+            android:text="@string/dialog_cancel"
+            android:gravity="center"
+            android:textSize="@dimen/size_text"
+            android:background="@drawable/shape_blueframe_whitebackground"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

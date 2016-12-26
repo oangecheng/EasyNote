@@ -1,42 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="orange.com.easynote.activity.AddNoteActivity">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size_height"
-        android:background="@color/BLUE_COMMON">
+        style="@style/bar_style"
+        android:id="@+id/rl_3">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/size_interval"
-            android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_add_note_back"
+            style="@style/back"/>
 
-            <TextView
-                android:id="@+id/tv_add_category"
-                style="@style/AddNoteText"
-                android:text="分类"/>
-
-            <TextView
-                android:id="@+id/tv_add_image"
-                style="@style/AddNoteText"
-                android:layout_marginLeft="@dimen/size_interval_large"
-                android:text="图片"/>
-
-            <TextView
-                android:id="@+id/tv_add_voice"
-                style="@style/AddNoteText"
-                android:layout_marginLeft="@dimen/size_interval_large"
-                android:text="音频"/>
-
-        </LinearLayout>
+        <TextView
+            style="@style/AddNoteText"
+            android:layout_centerInParent="true"
+            android:text="@string/add_note_title"/>
 
         <TextView
             android:id="@+id/tv_save"
@@ -48,81 +29,133 @@
 
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/et_title"
+    <LinearLayout
+        android:id="@+id/ll_add_note"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_height"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_3"
         android:layout_marginLeft="@dimen/size_interval"
         android:layout_marginRight="@dimen/size_interval"
         android:layout_marginTop="@dimen/size_interval_large"
-        android:background="@color/WHITE_COMMON"
-        android:hint="请输入标题"
-        android:textAlignment="center"/>
+        android:orientation="vertical"
+        android:background="@color/WHITE_COMMON">
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_height"
+            android:background="@color/WHITE_COMMON"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/size_interval_large"
+            android:layout_marginLeft="@dimen/size_interval_large"
+            android:singleLine="true"
+            android:hint="请输入标题"/>
+
+        <ImageView
+            style="@style/Line"/>
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/size_height"
+            android:background="@color/WHITE_COMMON"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/size_interval_large"
+            android:layout_marginLeft="@dimen/size_interval_large"
+            android:hint="请输入内容"/>
+
+    </LinearLayout>
+
 
     <ImageView
-        style="@style/Line"/>
-
-    <EditText
-        android:id="@+id/et_content"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size_height"
-        android:layout_marginLeft="@dimen/size_interval"
-        android:layout_marginRight="@dimen/size_interval"
-        android:background="@color/WHITE_COMMON"
-        android:hint="请输入内容"
-        android:textAlignment="center"/>
-
-    <ImageView
-        style="@style/Line"/>
-
-    <RelativeLayout
+        android:id="@+id/iv_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/size_interval"
-        android:layout_marginRight="@dimen/size_interval">
-        <ImageView
-            android:id="@+id/iv_note"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
-
-    <ImageView
-        style="@style/Line"/>
-
-    <RelativeLayout
-
-        android:id="@+id/rl_record"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size_height"
-        android:orientation="horizontal"
+        android:layout_below="@+id/ll_add_note"
         android:layout_marginLeft="@dimen/size_interval"
         android:layout_marginRight="@dimen/size_interval"
-        android:background="@color/DEFINED_GREY">
+        android:layout_marginTop="@dimen/size_interval"/>
+
+
+    <FrameLayout
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_4"
+        android:layout_alignParentRight="true">
+
+        <LinearLayout
+
+            android:id="@+id/ll_record"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/WHITE_COMMON">
+
+            <TextView
+                style="@style/pop_textView"
+                android:text="@string/record_start"/>
+
+            <ImageView
+                style="@style/Line"/>
+
+            <TextView
+                style="@style/pop_textView"
+                android:text="@string/record_pose"/>
+
+            <ImageView
+                style="@style/Line"/>
+
+            <TextView
+                style="@style/pop_textView"
+                android:text="@string/record_stop"/>
+
+            <ImageView
+                style="@style/Line"/>
+
+            <TextView
+                style="@style/pop_textView"
+                android:text="@string/record_play"/>
+
+            <ImageView
+                style="@style/Line"/>
+
+            <TextView
+                style="@style/pop_textView"
+                android:text="@string/record_cancel"/>
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+    <RelativeLayout
+        style="@style/bar_style"
+        android:id="@+id/rl_4"
+        android:layout_alignParentBottom="true">
 
         <TextView
+            android:id="@+id/tv_add_category"
             style="@style/AddNoteText"
-            android:layout_marginLeft="@dimen/size_interval"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/size_interval_large"
             android:layout_centerVertical="true"
-            android:text="开始录音"/>
+            android:text="@string/select_category"/>
 
         <TextView
+            android:id="@+id/tv_add_image"
             style="@style/AddNoteText"
-            android:layout_marginLeft="@dimen/size_interval"
-            android:layout_centerVertical="true"
-            android:text="暂停录音"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:text="@string/add_image"/>
 
         <TextView
+            android:id="@+id/tv_add_voice"
             style="@style/AddNoteText"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/size_interval"
+            android:layout_marginRight="@dimen/size_interval_large"
             android:layout_centerVertical="true"
-            android:text="停止录音"/>
-
+            android:text="@string/record_voice"/>
     </RelativeLayout>
 
 
-
-
-</LinearLayout>
+</RelativeLayout>

@@ -9,11 +9,13 @@ public class CategoryInfo {
     private String categoryTitle;
     private int noteNum;
     private long categoryID;
+    private boolean isSelected;
 
     public CategoryInfo(String categoryTitle, int noteNum, long categoryID) {
         this.categoryTitle = categoryTitle;
         this.noteNum = noteNum;
         this.categoryID = categoryID;
+        this.isSelected = false;
     }
 
     public String getCategoryTitle() {
@@ -38,5 +40,13 @@ public class CategoryInfo {
 
     public void setCategoryID(int categoryID) {
         this.categoryID = categoryID;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

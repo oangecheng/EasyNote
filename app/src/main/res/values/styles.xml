@@ -20,9 +20,22 @@
         <item name="android:layout_height">match_parent</item>
     </style>
 
-    <!--Bar上的style-->
+    <!--bar的样式-->
+    <style name="bar_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/size_height</item>
+        <item name="android:background">@color/BLUE_COMMON</item>
+    </style>
+
+    <!--Bar上的文字style-->
     <style name="AddNoteText" parent="wrap_content">
         <item name="android:textColor">@color/WHITE_COMMON</item>
+        <item name="android:textSize">@dimen/size_text</item>
+    </style>
+
+    <!--Bar上的style-->
+    <style name="OtherText" parent="wrap_content">
+        <item name="android:textColor">@color/BLUE_COMMON</item>
         <item name="android:textSize">@dimen/size_text</item>
     </style>
 
@@ -42,5 +55,25 @@
         <item name="android:background">@drawable/dialog_shape</item>
     </style>
 
+    <!--返回按钮-->
+    <style name="back">
+        <item name="android:layout_width">35dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:background">@mipmap/back</item>
+        <item name="android:layout_marginLeft">@dimen/size_interval</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="pop_textView">
+        <item name="android:layout_width">180dp</item>
+        <item name="android:layout_height">@dimen/size_height</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/BLUE_COMMON</item>
+        <item name="android:textSize">@dimen/size_text</item>
+    </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 </resources>

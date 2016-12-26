@@ -13,13 +13,14 @@
 
         <TextView
             android:id="@+id/tv_1"
-            android:layout_width="wrap_content"
+            android:layout_width="256dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/size_interval"
+            android:layout_marginTop="@dimen/size_interval_large"
             android:text="输入类别名称"
-            android:textSize="25dp"
-            android:textColor="@color/BLACK_COMMON"/>
+            android:textSize="@dimen/size_text"
+            android:gravity="center"
+            android:textColor="@color/BLUE_COMMON"/>
 
 
         <EditText
@@ -27,39 +28,42 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/size_interval"
-            android:layout_marginRight="@dimen/size_interval"
+            android:layout_marginLeft="@dimen/size_interval_large"
+            android:layout_marginRight="@dimen/size_interval_large"
             android:layout_marginTop="@dimen/size_interval"
             android:layout_below="@id/tv_1"
-            android:hint="十个字以内"
-            android:maxLength="5"
-            android:background="@drawable/dialog_shape"/>
+            android:gravity="center"
+            android:hint="六个字以内"
+            android:maxLength="6"
+            android:background="@drawable/shape_blueframe_whitebackground"/>
 
-        <Button
-            android:id="@+id/btn_sure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/et_category_title"
+        <TextView
+            android:id="@+id/tv_dialog_sure"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
             android:layout_below="@id/et_category_title"
-            android:layout_marginBottom="@dimen/size_interval"
-            android:layout_marginTop="@dimen/size_interval"
+            android:layout_marginBottom="@dimen/size_interval_large"
+            android:layout_marginTop="@dimen/size_interval_large"
+            android:layout_marginLeft="@dimen/size_interval_large"
             android:text="确定"
-            android:textColor="@color/WHITE_COMMON"
+            android:gravity="center"
+            android:textColor="@color/BLUE_COMMON"
             android:textSize="@dimen/size_text"
-            android:background="@drawable/button_click_style"/>
+            android:background="@drawable/shape_blueframe_whitebackground"/>
 
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/et_category_title"
+        <TextView
+            android:id="@+id/tv_dialog_cancel"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
             android:layout_below="@id/et_category_title"
+            android:layout_alignParentRight="true"
             android:layout_marginBottom="@dimen/size_interval"
-            android:layout_marginTop="@dimen/size_interval"
+            android:layout_marginTop="@dimen/size_interval_large"
+            android:layout_marginRight="@dimen/size_interval_large"
             android:text="取消"
-            android:textColor="@color/WHITE_COMMON"
+            android:gravity="center"
             android:textSize="@dimen/size_text"
-            android:background="@drawable/button_click_style"/>
+            android:background="@drawable/shape_blueframe_whitebackground"/>
 
     </RelativeLayout>
 

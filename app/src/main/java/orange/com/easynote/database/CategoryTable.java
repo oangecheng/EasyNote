@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import orange.com.easynote.enity.CategoryInfo;
+import orange.com.easynote.utils.AppConstant;
 
 /**
  * Created by Orange on 2016/12/22.
@@ -40,7 +41,7 @@ public class CategoryTable extends Database {
                 do {
                     long id = cursor.getLong(cursor.getColumnIndex(CategoryEntry._ID));
                     String title = cursor.getString(cursor.getColumnIndex(CategoryEntry.CATEGORY_TITLE));
-                    int count = DatabaseFactory.getNoteTable(context).getCountByCategory(1, title);
+                    int count = DatabaseFactory.getNoteTable(context).getCountByCategory(AppConstant.MODE_1, title);
                     list.add(new CategoryInfo(title, count, id));
                 } while (cursor.moveToNext());
             }
