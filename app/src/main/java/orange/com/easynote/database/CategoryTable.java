@@ -12,6 +12,7 @@ import java.util.List;
 
 import orange.com.easynote.enity.CategoryInfo;
 import orange.com.easynote.utils.AppConstant;
+import orange.com.easynote.utils.SharedPreferenceUtil;
 
 /**
  * Created by Orange on 2016/12/22.
@@ -42,7 +43,12 @@ public class CategoryTable extends Database {
                     long id = cursor.getLong(cursor.getColumnIndex(CategoryEntry._ID));
                     String title = cursor.getString(cursor.getColumnIndex(CategoryEntry.CATEGORY_TITLE));
                     int count = DatabaseFactory.getNoteTable(context).getCountByCategory(AppConstant.MODE_1, title);
-                    list.add(new CategoryInfo(title, count, id));
+                    if (!title.equals(SharedPreferenceUtil.getCategory(context))){
+                        list.add(new CategoryInfo(title, count, id, false));
+                    }else {
+                        list.add(new CategoryInfo(title, count, id, true));
+                    }
+
                 } while (cursor.moveToNext());
             }
             cursor.close();

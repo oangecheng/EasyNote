@@ -19,21 +19,22 @@ import orange.com.easynote.utils.SharedPreferenceUtil;
 
 public class AddNoteActivity extends BaseActivity {
     //final型常量
-    private final int IMAGE = 1;
+    protected final int IMAGE = 1;
 
     //控件
-    private TextView tvSave;
-    private TextView tvAddCategory;
-    private TextView tvAddImage;
-    private TextView tvAddVoice;
-    private ImageView ivNote;
-    private EditText etTitle;
-    private EditText etContent;
-    private LinearLayout linerVoice;
-    private TextView tvBack;
+    protected TextView tvSave;
+    protected TextView tvAddCategory;
+    protected TextView tvAddImage;
+    protected TextView tvAddVoice;
+    protected ImageView ivNote;
+    protected EditText etTitle;
+    protected EditText etContent;
+    protected LinearLayout linerVoice;
+    protected TextView tvBack;
+    protected TextView tvTitle;
 
     //全局变量
-    private String imagePath = "";
+    protected String imagePath = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class AddNoteActivity extends BaseActivity {
         tvAddImage.setOnClickListener(new AddImage());
         tvSave.setOnClickListener(new SaveNote());
         tvAddCategory.setOnClickListener(new AddCategory());
-        tvAddVoice.setOnClickListener(new AddVoice());
+        //tvAddVoice.setOnClickListener(new AddVoice());
         tvBack.setOnClickListener(new Back());
 
     }
@@ -60,9 +61,11 @@ public class AddNoteActivity extends BaseActivity {
         tvAddCategory = (TextView) findViewById(R.id.tv_add_category);
         tvSave = (TextView) findViewById(R.id.tv_save);
         tvAddVoice = (TextView) findViewById(R.id.tv_add_voice);
-        linerVoice = (LinearLayout)findViewById(R.id.ll_record);
-        tvBack = (TextView)findViewById(R.id.tv_add_note_back);
+        linerVoice = (LinearLayout) findViewById(R.id.ll_record);
+        tvBack = (TextView) findViewById(R.id.tv_add_note_back);
+        tvTitle = (TextView)findViewById(R.id.tv_activity_title);
 
+        tvTitle.setText("写日记");
         linerVoice.setVisibility(View.GONE);
 
     }
@@ -116,13 +119,13 @@ public class AddNoteActivity extends BaseActivity {
     private class AddVoice implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-           if (linerVoice.getVisibility()==View.GONE){
-               linerVoice.setVisibility(View.VISIBLE);
-               tvAddVoice.setText("点击保存");
-           }else {
-               linerVoice.setVisibility(View.GONE);
-               tvAddVoice.setText(getResources().getString(R.string.record_voice));
-           }
+            if (linerVoice.getVisibility() == View.GONE) {
+                linerVoice.setVisibility(View.VISIBLE);
+                tvAddVoice.setText("点击取消");
+            } else {
+                linerVoice.setVisibility(View.GONE);
+                tvAddVoice.setText(getResources().getString(R.string.record_voice));
+            }
         }
     }
 
@@ -131,31 +134,32 @@ public class AddNoteActivity extends BaseActivity {
     private class SaveNote implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-
             String title = etTitle.getText().toString();
-            String content = etContent.getText().toString();
-            String time = System.currentTimeMillis() + "";
-            String image = imagePath;
-            String category = SharedPreferenceUtil.getCategory(AddNoteActivity.this);
-            String voice = "";
-            int collect = 0;
 
-            boolean success = DatabaseFactory.getNoteTable(AddNoteActivity.this).
-                    insertNote(title, content, time, image, voice, category, collect);
-
-            if (success) {
-                Intent intent = new Intent(AddNoteActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+            if (title.equals("")) {
+                Toast.makeText(AddNoteActivity.this, "标题不能为空", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(AddNoteActivity.this, "新建日记失败", Toast.LENGTH_SHORT).show();
-            }
+                String content = etContent.getText().toString();
+                String time = System.currentTimeMillis() + "";
+                String category = SharedPreferenceUtil.getCategory(AddNoteActivity.this);
+                String voice = "";
 
+                boolean success = DatabaseFactory.getNoteTable(AddNoteActivity.this).
+                        insertNote(title, content, time, imagePath, voice, category, AppConstant.NOTE_UNCOLLECT);
+
+                if (success) {
+                    Intent intent = new Intent(AddNoteActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(AddNoteActivity.this, "新建日记失败", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     }
 
     //返回
-    private class Back implements View.OnClickListener{
+    private class Back implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             finish();

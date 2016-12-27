@@ -7,8 +7,8 @@
     tools:context="orange.com.easynote.activity.AddNoteActivity">
 
     <RelativeLayout
-        style="@style/bar_style"
-        android:id="@+id/rl_3">
+        android:id="@+id/rl_3"
+        style="@style/bar_style">
 
         <TextView
             android:id="@+id/tv_add_note_back"
@@ -16,6 +16,7 @@
 
         <TextView
             style="@style/AddNoteText"
+            android:id="@+id/tv_activity_title"
             android:layout_centerInParent="true"
             android:text="@string/add_note_title"/>
 
@@ -29,53 +30,97 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_add_note"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/rl_3"
-        android:layout_marginLeft="@dimen/size_interval"
-        android:layout_marginRight="@dimen/size_interval"
-        android:layout_marginTop="@dimen/size_interval_large"
-        android:orientation="vertical"
-        android:background="@color/WHITE_COMMON">
+        android:layout_marginBottom="@dimen/size_height">
 
-        <EditText
-            android:id="@+id/et_title"
+        <ScrollView
+            android:id="@+id/sv"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_height"
-            android:background="@color/WHITE_COMMON"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/size_interval_large"
-            android:layout_marginLeft="@dimen/size_interval_large"
-            android:singleLine="true"
-            android:hint="请输入标题"/>
+            android:layout_height="match_parent"
+            android:scrollbars="none">
 
-        <ImageView
-            style="@style/Line"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/et_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/size_height"
-            android:background="@color/WHITE_COMMON"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="@dimen/size_interval_large"
-            android:layout_marginLeft="@dimen/size_interval_large"
-            android:hint="请输入内容"/>
+                <LinearLayout
+                    android:id="@+id/ll_add_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_interval"
+                    android:layout_marginRight="@dimen/size_interval"
+                    android:layout_marginTop="@dimen/size_interval_large"
+                    android:background="@color/WHITE_COMMON"
+                    android:orientation="vertical">
 
-    </LinearLayout>
+                    <EditText
+                        android:id="@+id/et_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_height"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size_interval_large"
+                        android:layout_marginRight="@dimen/size_interval_large"
+                        android:background="@color/WHITE_COMMON"
+                        android:hint="请输入标题"
+                        android:singleLine="true"/>
+
+                    <ImageView
+                        style="@style/Line"/>
+
+                    <EditText
+                        android:id="@+id/et_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/size_interval_large"
+                        android:layout_marginRight="@dimen/size_interval_large"
+                        android:background="@color/WHITE_COMMON"
+                        android:hint="请输入内容"
+                        android:minHeight="@dimen/size_height"/>
+
+                </LinearLayout>
 
 
-    <ImageView
-        android:id="@+id/iv_note"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_add_note"
-        android:layout_marginLeft="@dimen/size_interval"
-        android:layout_marginRight="@dimen/size_interval"
-        android:layout_marginTop="@dimen/size_interval"/>
+                <RelativeLayout
+                    android:id="@+id/rl_11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_add_note"
+                    android:layout_marginLeft="@dimen/size_interval"
+                    android:layout_marginRight="@dimen/size_interval"
+                    android:layout_marginTop="@dimen/size_interval"
+                    android:background="@color/WHITE_COMMON">
+
+                    <ImageView
+                        android:id="@+id/iv_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="@dimen/size_interval"
+                        android:layout_marginLeft="@dimen/size_interval"
+                        android:layout_marginRight="@dimen/size_interval"
+                        android:layout_marginTop="@dimen/size_interval"
+                        android:background="@mipmap/default_img"/>
+
+                </RelativeLayout>
+
+
+                <!--留着写录音完成之后的-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_height"
+                    android:layout_below="@+id/rl_11">
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+
+    </RelativeLayout>
 
 
     <FrameLayout
@@ -89,8 +134,8 @@
             android:id="@+id/ll_record"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/WHITE_COMMON">
+            android:background="@color/WHITE_COMMON"
+            android:orientation="vertical">
 
             <TextView
                 style="@style/pop_textView"
@@ -110,12 +155,12 @@
                 style="@style/pop_textView"
                 android:text="@string/record_stop"/>
 
-            <ImageView
-                style="@style/Line"/>
+            <!--<ImageView-->
+                <!--style="@style/Line"/>-->
 
-            <TextView
-                style="@style/pop_textView"
-                android:text="@string/record_play"/>
+            <!--<TextView-->
+                <!--style="@style/pop_textView"-->
+                <!--android:text="@string/record_play"/>-->
 
             <ImageView
                 style="@style/Line"/>
@@ -130,16 +175,16 @@
     </FrameLayout>
 
     <RelativeLayout
-        style="@style/bar_style"
         android:id="@+id/rl_4"
+        style="@style/bar_style"
         android:layout_alignParentBottom="true">
 
         <TextView
             android:id="@+id/tv_add_category"
             style="@style/AddNoteText"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/size_interval_large"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size_interval_large"
             android:text="@string/select_category"/>
 
         <TextView
@@ -152,8 +197,8 @@
             android:id="@+id/tv_add_voice"
             style="@style/AddNoteText"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/size_interval_large"
             android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/size_interval_large"
             android:text="@string/record_voice"/>
     </RelativeLayout>
 

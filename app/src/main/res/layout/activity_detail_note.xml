@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_detail_note"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="orange.com.easynote.activity.DetailNoteActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_6"
+        style="@style/bar_style">
+
+        <TextView
+            android:id="@+id/tv_back_detail"
+            style="@style/back"/>
+
+        <TextView
+            android:id="@+id/tv_detail_title"
+            style="@style/AddNoteText"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/size_interval"
+            android:layout_marginRight="@dimen/size_interval"
+            android:layout_toLeftOf="@+id/tv_edit_note"
+            android:layout_toRightOf="@+id/tv_back_detail"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="title"/>
+
+        <TextView
+            android:id="@+id/tv_edit_note"
+            style="@style/AddNoteText"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/size_interval"
+            android:text="编辑"/>
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_9"
+        android:layout_below="@+id/rl_6"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size_interval_large">
+
+            <TextView
+                android:id="@+id/tv_detail_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_interval"
+                android:layout_marginLeft="@dimen/size_interval"
+                android:text="00000"
+                android:textColor="@color/BLUE_COMMON"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_detail_time"
+                android:layout_marginLeft="@dimen/size_interval"
+                android:layout_marginRight="@dimen/size_interval"
+                android:layout_marginTop="@dimen/size_interval"
+                android:background="@color/WHITE_COMMON">
+
+                <TextView
+                    android:id="@+id/tv_detail_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/size_interval"
+                    android:layout_marginLeft="@dimen/size_interval"
+                    android:layout_marginRight="@dimen/size_interval"
+                    android:layout_marginTop="@dimen/size_interval"
+                    android:text="无任何内容"
+                    android:textColor="@color/DEFINED_GREY"
+                    android:textSize="@dimen/size_text"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_8"
+                android:layout_marginTop="@dimen/size_interval"
+                android:layout_marginLeft="@dimen/size_interval"
+                android:layout_marginRight="@dimen/size_interval"
+                android:background="@color/WHITE_COMMON">
+
+                <ImageView
+                    android:id="@+id/iv_detail_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/size_interval"
+                    android:layout_marginBottom="@dimen/size_interval"
+                    android:layout_marginLeft="@dimen/size_interval"
+                    android:layout_marginRight="@dimen/size_interval"/>
+
+            </RelativeLayout>
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/rl_7"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_height"
+                android:layout_below="@+id/rl_10"
+                android:layout_marginLeft="@dimen/size_interval"
+                android:layout_marginRight="@dimen/size_interval"
+                android:layout_marginTop="@dimen/size_interval"
+                android:background="@drawable/shape_blueframe_whitebackground">
+
+                <TextView
+                    android:id="@+id/tv_detail_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="播 放 录 音"
+                    android:textColor="@color/BLUE_COMMON"
+                    android:textSize="@dimen/size_text"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_height"
+                android:layout_below="@id/rl_7">
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+
+
+    </ScrollView>
+
+    <RelativeLayout
+        style="@style/bar_style"
+        android:id="@+id/rl_9"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/iv_detail_collect"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size_interval_large"
+            android:background="@mipmap/uncollect"/>
+
+        <ImageView
+            android:id="@+id/iv_detail_share"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/share"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -59,19 +59,61 @@ public class NoteTable extends Database {
     }
 
 
+    /**
+     * 删除note
+     *
+     * @param id
+     * @return
+     */
     public int deleteNote(long id) {
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
         return database.delete(NoteEntry.TABLE_NAME, NoteEntry._ID + "=? ", new String[]{id + ""});
     }
 
 
-    //根据不同的模式获取note的数据
-    public List<NoteInfo> getNoteList(int mode, String category) {
+    /**
+     * 更新note的collect状态
+     *
+     * @param id
+     * @param collect
+     * @return
+     * @throws Exception
+     */
+    public boolean updateNoteCollect(long id, int collect) throws Exception {
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(NoteEntry.NOTE_COLLECT, collect);
+        return (database.update(NoteEntry.TABLE_NAME, cv, NoteEntry._ID + "=?", new String[]{id + ""}) != -1);
+    }
+
+
+    public boolean updateNote(long id, String title, String content, String image, String voice, String category) {
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(NoteEntry.NOTE_TITLE, title);
+        cv.put(NoteEntry.NOTE_CONTENT, content);
+        cv.put(NoteEntry.NOTE_IMAGE, image);
+        cv.put(NoteEntry.NOTE_VOICE, voice);
+        cv.put(NoteEntry.NOTE_CATEGORY, category);
+
+        return (database.update(NoteEntry.TABLE_NAME, cv, NoteEntry._ID + "=?", new String[]{String.valueOf(id)}) != -1);
+    }
+
+
+    /**
+     * 根据不同的模式获取note的数据
+     *
+     * @param mode
+     * @param param 查询的参数
+     * @return
+     */
+    public List<NoteInfo> getNoteList(int mode, String param) {
         List<NoteInfo> list = new ArrayList<>();
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
         try {
             Cursor cursor = null;
             switch (mode) {
+
                 case 0:
                     cursor = database.query(
                             //查哪个表
@@ -81,6 +123,7 @@ public class NoteTable extends Database {
                             //根据什么查
                             null, null, null, null, NoteEntry._ID + " desc");
                     break;
+
                 case 1:
                     cursor = database.query(
                             //查哪个表
@@ -88,9 +131,27 @@ public class NoteTable extends Database {
                             //查哪些些东西
                             null,
                             //根据什么查
-                            NoteEntry.NOTE_CATEGORY + "=?", new String[]{category},
+                            NoteEntry.NOTE_CATEGORY + "=?", new String[]{param},
                             null, null, null);
                     break;
+
+                case 2:
+                    cursor = database.query(
+                            NoteEntry.TABLE_NAME,
+                            null,
+                            NoteEntry.NOTE_COLLECT + "=?", new String[]{String.valueOf(1)},
+                            null, null,
+                            NoteEntry._ID + " desc");
+                    break;
+
+                case 3:
+                    cursor = database.query(
+                            NoteEntry.TABLE_NAME,
+                            null,
+                            NoteEntry._ID + "=?", new String[]{param},
+                            null, null, null);
+                    break;
+
                 default:
                     break;
 
@@ -117,6 +178,7 @@ public class NoteTable extends Database {
 
         return list;
     }
+
 
     /**
      * 查询每个类别note的数量
@@ -152,7 +214,7 @@ public class NoteTable extends Database {
                     cursor = database.query(
                             NoteEntry.TABLE_NAME,
                             new String[]{NoteEntry.NOTE_COLLECT},
-                            NoteEntry.NOTE_COLLECT + "=?", new String[]{String.valueOf(0)},
+                            NoteEntry.NOTE_COLLECT + "=?", new String[]{String.valueOf(1)},
                             null, null, null);
                     break;
                 default:

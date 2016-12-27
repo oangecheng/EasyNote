@@ -10,6 +10,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import orange.com.easynote.R;
 import orange.com.easynote.enity.CategoryInfo;
+import orange.com.easynote.utils.SharedPreferenceUtil;
 
 /**
  * Created by Orange on 2016/12/24.
@@ -43,7 +44,9 @@ public class ItemAddCategory extends RelativeLayout {
     }
 
     public void bind(final CategoryInfo info) {
+
         tvTitle.setText(info.getCategoryTitle());
+
         if (info.isSelected()){
             ivRadio.setBackgroundResource(R.mipmap.selected);
         }else {

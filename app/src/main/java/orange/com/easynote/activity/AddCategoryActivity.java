@@ -108,6 +108,7 @@ public class AddCategoryActivity extends BaseActivity {
                     success = DatabaseFactory.getCategoryTable(AddCategoryActivity.this).insertCategory(title);
                     if (success) {
                         Toast.makeText(AddCategoryActivity.this, R.string.add_success, Toast.LENGTH_SHORT).show();
+                        SharedPreferenceUtil.setCategory(AddCategoryActivity.this, title);
                         //刷新数据
                         initList();
                     } else {
@@ -162,10 +163,8 @@ public class AddCategoryActivity extends BaseActivity {
             CategoryInfo info = categoryInfoList.get(i);
             selectedCategory = info.getCategoryTitle();
 
-            if (info.isSelected()){
-                info.setSelected(false);
-            }else {
-                for (CategoryInfo in: categoryInfoList){
+            if (!info.isSelected()) {
+                for (CategoryInfo in : categoryInfoList) {
                     in.setSelected(false);
                 }
                 info.setSelected(true);

@@ -57,6 +57,8 @@ public class MainActivity extends BaseActivity {
     //note的adapter
     private NoteAdapter noteAdapter;
 
+    private boolean isLongClick = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +66,16 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         initView();
 
-
+        //根据分类查看日记
         tvCategory.setOnClickListener(new CategoryClickListener());
+        //添加日记
         tvAddNote.setOnClickListener(new AddNoteClickListener());
+        //隐藏分类的listView
+        frameLayout.setOnClickListener(new DismissCategoryList());
+        //查看所有日记
+        rlAllNote.setOnClickListener(new AllNoteClickListener());
+        //查看我收藏的日记
+        rlMyNote.setOnClickListener(new MyNoteClickListener());
 
     }
 
@@ -118,6 +127,7 @@ public class MainActivity extends BaseActivity {
         noteAdapter = new NoteAdapter(MainActivity.this, noteInfoList);
         lvNote.setAdapter(noteAdapter);
         lvNote.setOnItemLongClickListener(new DeleteNote());
+        lvNote.setOnItemClickListener(new NoteDetail());
 
 
     }
@@ -175,8 +185,11 @@ public class MainActivity extends BaseActivity {
     private class AllNoteClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            initList();
+            noteInfoList = DatabaseFactory.getNoteTable(MainActivity.this).getNoteList(AppConstant.MODE_0, "");
+            setAdapter();
             tvCategory.setText("全部日记");
+            frameLayout.setVisibility(View.GONE);
+            ivMore.setBackgroundResource(R.mipmap.more);
         }
     }
 
@@ -184,7 +197,11 @@ public class MainActivity extends BaseActivity {
     private class MyNoteClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-
+            noteInfoList = DatabaseFactory.getNoteTable(MainActivity.this).getNoteList(AppConstant.MODE_2, "");
+            setAdapter();
+            tvCategory.setText("我的收藏");
+            frameLayout.setVisibility(View.GONE);
+            ivMore.setBackgroundResource(R.mipmap.more);
         }
     }
 
@@ -193,19 +210,19 @@ public class MainActivity extends BaseActivity {
     private class CategoryItemClick implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            Toast.makeText(MainActivity.this, i + "", Toast.LENGTH_SHORT).show();
 
             String title = categoryInfoList.get(i).getCategoryTitle();
             tvCategory.setText(title);
 
-            if (title.equals("全部备忘录")) {
-                initList();
-            } else if (title.equals("我的收藏")) {
-
+            noteInfoList = DatabaseFactory.getNoteTable(MainActivity.this).getNoteList(1, title);
+            setAdapter();
+            if (noteInfoList.isEmpty()) {
+                Toast.makeText(MainActivity.this, title + "没有任何记录", Toast.LENGTH_SHORT).show();
             } else {
-                noteInfoList = DatabaseFactory.getNoteTable(MainActivity.this).getNoteList(1, title);
-                setAdapter();
+                frameLayout.setVisibility(View.GONE);
+                ivMore.setBackgroundResource(R.mipmap.more);
             }
+
         }
     }
 
@@ -223,10 +240,30 @@ public class MainActivity extends BaseActivity {
     private class DeleteNote implements AdapterView.OnItemLongClickListener {
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-
             showDialog(noteInfoList.get(i).getId());
+            return true;
+        }
+    }
 
-            return false;
+    //单击note
+    private class NoteDetail implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, DetailNoteActivity.class);
+            intent.putExtra(AppConstant.NOTE_ID, noteInfoList.get(i).getId());
+            startActivity(intent);
+
+            isLongClick = false;
+        }
+    }
+
+    //自动收起category的list
+    private class DismissCategoryList implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            frameLayout.setVisibility(View.GONE);
+            ivMore.setBackgroundResource(R.mipmap.more);
         }
     }
 

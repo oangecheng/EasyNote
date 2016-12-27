@@ -11,11 +11,11 @@ public class CategoryInfo {
     private long categoryID;
     private boolean isSelected;
 
-    public CategoryInfo(String categoryTitle, int noteNum, long categoryID) {
+    public CategoryInfo(String categoryTitle, int noteNum, long categoryID, boolean isSelected) {
         this.categoryTitle = categoryTitle;
         this.noteNum = noteNum;
         this.categoryID = categoryID;
-        this.isSelected = false;
+        this.isSelected = isSelected;
     }
 
     public String getCategoryTitle() {

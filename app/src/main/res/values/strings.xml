@@ -24,7 +24,7 @@
     <string name="record_pose">暂 停 录 音</string>
     <string name="record_stop">停 止 录 音</string>
     <string name="record_play">播 放 录 音</string>
-    <string name="record_cancel">取 消 录 音</string>
+    <string name="record_cancel">保 存 录 音</string>
     <string name="title_activity_album">AlbumActivity</string>
 
     <!--dialog文字-->

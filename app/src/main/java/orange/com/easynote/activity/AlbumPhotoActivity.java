@@ -7,7 +7,6 @@ import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -54,7 +53,7 @@ public class AlbumPhotoActivity extends BaseActivity {
 
     private void initView() {
         gridView = (GridView) findViewById(R.id.gv_album);
-        ivBack = (TextView)findViewById(R.id.tv_back_album);
+        ivBack = (TextView) findViewById(R.id.tv_back_album);
         initList();
     }
 
@@ -88,7 +87,7 @@ public class AlbumPhotoActivity extends BaseActivity {
     }
 
     //返回
-    private class Back implements View.OnClickListener{
+    private class Back implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             finish();

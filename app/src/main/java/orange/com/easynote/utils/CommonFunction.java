@@ -26,7 +26,7 @@ public class CommonFunction {
      * @param path
      */
     public static void showImage(Context context, ImageView iv, String path) {
-        iv.setImageResource(R.mipmap.ic_launcher);
+        iv.setImageResource(R.mipmap.default_img);
         ImageLoader.getInstance().loadImage(path, iv);
     }
 
