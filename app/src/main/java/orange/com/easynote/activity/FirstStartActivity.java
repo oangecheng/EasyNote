@@ -25,6 +25,7 @@ public class FirstStartActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(FirstStartActivity.this, MainActivity.class));
+                finish();
             }
         });
     }

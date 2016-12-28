@@ -26,6 +26,7 @@ public class WelcomeActivity extends BaseActivity {
                 switch (msg.what){
                     case 0:
                         startActivity(intent);
+                        finish();
                         break;
                 }
             }

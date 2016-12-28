@@ -43,9 +43,9 @@ public class CategoryTable extends Database {
                     long id = cursor.getLong(cursor.getColumnIndex(CategoryEntry._ID));
                     String title = cursor.getString(cursor.getColumnIndex(CategoryEntry.CATEGORY_TITLE));
                     int count = DatabaseFactory.getNoteTable(context).getCountByCategory(AppConstant.MODE_1, title);
-                    if (!title.equals(SharedPreferenceUtil.getCategory(context))){
+                    if (!title.equals(SharedPreferenceUtil.getCategory(context))) {
                         list.add(new CategoryInfo(title, count, id, false));
-                    }else {
+                    } else {
                         list.add(new CategoryInfo(title, count, id, true));
                     }
 
@@ -80,6 +80,18 @@ public class CategoryTable extends Database {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public boolean deleteCategory(String category) {
+        boolean delete_success;
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        delete_success = (database.delete(CategoryEntry.TABLE_NAME, CategoryEntry.CATEGORY_TITLE + "=?", new String[]{category})!=-1);
+        try {
+            delete_success = DatabaseFactory.getNoteTable(context).updateNoteCategory(category);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return delete_success;
     }
 
 

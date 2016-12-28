@@ -57,7 +57,6 @@ public class MainActivity extends BaseActivity {
     //note的adapter
     private NoteAdapter noteAdapter;
 
-    private boolean isLongClick = true;
 
 
     @Override
@@ -254,7 +253,6 @@ public class MainActivity extends BaseActivity {
             intent.putExtra(AppConstant.NOTE_ID, noteInfoList.get(i).getId());
             startActivity(intent);
 
-            isLongClick = false;
         }
     }
 

@@ -75,7 +75,9 @@ public class AddCategoryActivity extends BaseActivity {
     private void setAdapter() {
         adapter = new AddCategoryAdapter(categoryInfoList, AddCategoryActivity.this);
         lvCategory.setAdapter(adapter);
+
         lvCategory.setOnItemClickListener(new ItemCLick());
+        lvCategory.setOnItemLongClickListener(new ItemLongClick());
     }
 
 
@@ -130,6 +132,49 @@ public class AddCategoryActivity extends BaseActivity {
         dialog.show();
     }
 
+
+    /**
+     * 删除分类
+     *
+     * @param category
+     */
+    private void showDeleteCategoryDialog(final String category) {
+
+        LayoutInflater inflater = LayoutInflater.from(AddCategoryActivity.this);
+        View view = inflater.inflate(R.layout.dialog_choice, null);
+
+        TextView tvSure = (TextView) view.findViewById(R.id.tv_dialog_deleteNote_sure);
+        TextView tvCancel = (TextView) view.findViewById(R.id.tv_dialog_deleteNote_cancel);
+
+        final DialogUtil dialog = new DialogUtil(AddCategoryActivity.this, view);
+
+        tvSure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                boolean success = DatabaseFactory.getCategoryTable(AddCategoryActivity.this).deleteCategory(category);
+
+                if (success) {
+                    Toast.makeText(AddCategoryActivity.this, "删除分类“" + category + "”成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(AddCategoryActivity.this, "删除分类“" + category + "”失败", Toast.LENGTH_SHORT).show();
+                }
+
+                initList();
+                dialog.dismiss();
+            }
+        });
+
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
     //添加分类的按钮响应事件
     private class AddCategory implements View.OnClickListener {
         @Override
@@ -172,6 +217,24 @@ public class AddCategoryActivity extends BaseActivity {
 
             adapter.notifyDataSetChanged();
 
+        }
+    }
+
+    private class ItemLongClick implements AdapterView.OnItemLongClickListener {
+
+        @Override
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            CategoryInfo info = categoryInfoList.get(i);
+
+            if (info.getCategoryTitle().equals("其他分类")) {
+                Toast.makeText(AddCategoryActivity.this, "默认分类不能删除", Toast.LENGTH_SHORT).show();
+            } else if (info.isSelected()) {
+                Toast.makeText(AddCategoryActivity.this, "分类被选中，不能删除", Toast.LENGTH_SHORT).show();
+            } else {
+                showDeleteCategoryDialog(categoryInfoList.get(i).getCategoryTitle());
+            }
+            return true;
         }
     }
 

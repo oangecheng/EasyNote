@@ -38,6 +38,7 @@ public class EditNoteActivity extends AddNoteActivity {
                 if (!info.getImage().isEmpty()) {
                     Bitmap bitmap = BitmapFactory.decodeFile(info.getImage());
                     this.ivNote.setImageBitmap(bitmap);
+                    imagePath = info.getImage();
                 }
 
                 if (!info.getVoice().isEmpty()) {

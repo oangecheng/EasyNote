@@ -52,6 +52,7 @@ public class AddNoteActivity extends BaseActivity {
     }
 
 
+    //初始化应用界面
     private void initView() {
         tvAddImage = (TextView) findViewById(R.id.tv_add_image);
         ivNote = (ImageView) findViewById(R.id.iv_note);
@@ -67,6 +68,7 @@ public class AddNoteActivity extends BaseActivity {
 
         tvTitle.setText("写日记");
         linerVoice.setVisibility(View.GONE);
+        ivNote.setImageResource(R.mipmap.default_img);
 
     }
 

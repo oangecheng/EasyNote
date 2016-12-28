@@ -86,7 +86,31 @@ public class NoteTable extends Database {
         return (database.update(NoteEntry.TABLE_NAME, cv, NoteEntry._ID + "=?", new String[]{id + ""}) != -1);
     }
 
+    /**
+     * 更新note的分类
+     * @param category
+     * @return
+     * @throws Exception
+     */
+    public boolean updateNoteCategory(String category) throws Exception {
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(NoteEntry.NOTE_CATEGORY, "其他分类");
+        return (database.update(NoteEntry.TABLE_NAME, cv, NoteEntry.NOTE_CATEGORY + "=?", new String[]{category}) != -1);
+    }
 
+
+    /**
+     * 更新note的数据
+     *
+     * @param id
+     * @param title
+     * @param content
+     * @param image
+     * @param voice
+     * @param category
+     * @return
+     */
     public boolean updateNote(long id, String title, String content, String image, String voice, String category) {
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
