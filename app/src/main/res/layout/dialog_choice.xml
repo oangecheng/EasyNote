@@ -8,7 +8,7 @@
         android:layout_centerInParent="true">
 
         <TextView
-            android:id="@+id/tv_2"
+            android:id="@+id/tv_dialog_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/dialog_delete_note"
@@ -21,7 +21,7 @@
             android:id="@+id/tv_dialog_deleteNote_sure"
             android:layout_width="80dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/tv_2"
+            android:layout_below="@+id/tv_dialog_title"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="@dimen/size_height"
             android:layout_marginLeft="@dimen/size_interval_large"
@@ -36,7 +36,7 @@
             android:id="@+id/tv_dialog_deleteNote_cancel"
             android:layout_width="80dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/tv_2"
+            android:layout_below="@+id/tv_dialog_title"
             android:layout_marginTop="@dimen/size_height"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/size_interval_large"

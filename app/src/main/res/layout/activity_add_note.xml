@@ -53,7 +53,7 @@
                     android:layout_marginLeft="@dimen/size_interval"
                     android:layout_marginRight="@dimen/size_interval"
                     android:layout_marginTop="@dimen/size_interval_large"
-                    android:background="@color/WHITE_COMMON"
+                    android:background="@drawable/shape_radius"
                     android:orientation="vertical">
 
                     <EditText
@@ -61,6 +61,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_height"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/size_interval"
                         android:layout_marginLeft="@dimen/size_interval_large"
                         android:layout_marginRight="@dimen/size_interval_large"
                         android:background="@color/WHITE_COMMON"
@@ -77,22 +78,70 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/size_interval_large"
                         android:layout_marginRight="@dimen/size_interval_large"
+                        android:layout_marginBottom="@dimen/size_interval_large"
                         android:background="@color/WHITE_COMMON"
                         android:hint="请输入内容"
                         android:minHeight="@dimen/size_height"/>
 
                 </LinearLayout>
 
+                <RelativeLayout
+                    android:id="@+id/rl_voice"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_height"
+                    android:layout_marginLeft="@dimen/size_interval"
+                    android:layout_marginRight="@dimen/size_interval"
+                    android:layout_marginTop="@dimen/size_interval"
+                    android:background="@drawable/shape_radius"
+                    android:layout_below="@+id/ll_add_note">
+
+                    <ImageView
+                        android:id="@+id/iv_start_record"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/size_interval"
+                        android:background="@mipmap/start_record"/>
+
+                    <ImageView
+                        android:id="@+id/iv_start_pose"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/iv_start_record"
+                        android:layout_marginLeft="@dimen/size_interval_large"/>
+
+                    <TextView
+                        android:id="@+id/tv_record_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/iv_start_pose"
+                        android:layout_marginLeft="@dimen/size_interval_large"
+                        android:text="00:26"/>
+
+                    <ImageView
+                        android:id="@+id/iv_end_record"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_record_time"
+                        android:layout_marginLeft="@dimen/size_interval_large"
+                        android:background="@mipmap/stop"/>
+
+
+                </RelativeLayout>
+
 
                 <RelativeLayout
                     android:id="@+id/rl_11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/ll_add_note"
+                    android:layout_below="@+id/rl_voice"
                     android:layout_marginLeft="@dimen/size_interval"
                     android:layout_marginRight="@dimen/size_interval"
                     android:layout_marginTop="@dimen/size_interval"
-                    android:background="@color/WHITE_COMMON">
+                    android:background="@drawable/shape_radius">
 
                     <ImageView
                         android:id="@+id/iv_note"
@@ -121,57 +170,6 @@
 
     </RelativeLayout>
 
-
-    <FrameLayout
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/rl_4"
-        android:layout_alignParentRight="true">
-
-        <LinearLayout
-
-            android:id="@+id/ll_record"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/WHITE_COMMON"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/pop_textView"
-                android:text="@string/record_start"/>
-
-            <ImageView
-                style="@style/Line"/>
-
-            <TextView
-                style="@style/pop_textView"
-                android:text="@string/record_pose"/>
-
-            <ImageView
-                style="@style/Line"/>
-
-            <TextView
-                style="@style/pop_textView"
-                android:text="@string/record_stop"/>
-
-            <!--<ImageView-->
-                <!--style="@style/Line"/>-->
-
-            <!--<TextView-->
-                <!--style="@style/pop_textView"-->
-                <!--android:text="@string/record_play"/>-->
-
-            <ImageView
-                style="@style/Line"/>
-
-            <TextView
-                style="@style/pop_textView"
-                android:text="@string/record_cancel"/>
-
-        </LinearLayout>
-
-
-    </FrameLayout>
 
     <RelativeLayout
         android:id="@+id/rl_4"

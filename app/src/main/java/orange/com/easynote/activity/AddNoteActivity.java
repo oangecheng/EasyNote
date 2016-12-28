@@ -5,16 +5,19 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import orange.com.easynote.R;
 import orange.com.easynote.database.DatabaseFactory;
 import orange.com.easynote.utils.AppConstant;
+import orange.com.easynote.utils.DialogUtil;
 import orange.com.easynote.utils.SharedPreferenceUtil;
 
 public class AddNoteActivity extends BaseActivity {
@@ -29,12 +32,14 @@ public class AddNoteActivity extends BaseActivity {
     protected ImageView ivNote;
     protected EditText etTitle;
     protected EditText etContent;
-    protected LinearLayout linerVoice;
     protected TextView tvBack;
     protected TextView tvTitle;
+    private RelativeLayout rlRecordVoice;
+    private ImageView ivStartPose;
 
     //全局变量
     protected String imagePath = "";
+    private boolean isRecording = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,19 @@ public class AddNoteActivity extends BaseActivity {
         tvAddCategory.setOnClickListener(new AddCategory());
         //tvAddVoice.setOnClickListener(new AddVoice());
         tvBack.setOnClickListener(new Back());
+        tvAddVoice.setOnClickListener(new AddVoice());
+
+        ivStartPose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isRecording){
+                    ivStartPose.setImageResource(R.mipmap.pose);
+                }else {
+                    ivStartPose.setImageResource(R.mipmap.start);
+                }
+               isRecording = !isRecording;
+            }
+        });
 
     }
 
@@ -62,12 +80,14 @@ public class AddNoteActivity extends BaseActivity {
         tvAddCategory = (TextView) findViewById(R.id.tv_add_category);
         tvSave = (TextView) findViewById(R.id.tv_save);
         tvAddVoice = (TextView) findViewById(R.id.tv_add_voice);
-        linerVoice = (LinearLayout) findViewById(R.id.ll_record);
         tvBack = (TextView) findViewById(R.id.tv_add_note_back);
-        tvTitle = (TextView)findViewById(R.id.tv_activity_title);
+        tvTitle = (TextView) findViewById(R.id.tv_activity_title);
+        rlRecordVoice = (RelativeLayout)findViewById(R.id.rl_voice);
+        ivStartPose = (ImageView)findViewById(R.id.iv_start_pose);
 
         tvTitle.setText("写日记");
-        linerVoice.setVisibility(View.GONE);
+        rlRecordVoice.setVisibility(View.GONE);
+        ivStartPose.setImageResource(R.mipmap.start);
         ivNote.setImageResource(R.mipmap.default_img);
 
     }
@@ -87,9 +107,51 @@ public class AddNoteActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (etTitle.getText().toString().equals("") && etContent.getText().toString().equals("")) {
+                finish();
+            } else {
+                showBackDialog();
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     private void showImage(String filepath) {
         Bitmap bitmap = BitmapFactory.decodeFile(filepath);
         ivNote.setImageBitmap(bitmap);
+    }
+
+    private void showBackDialog() {
+
+        LayoutInflater inflater = LayoutInflater.from(AddNoteActivity.this);
+        View view = inflater.inflate(R.layout.dialog_choice, null);
+
+        TextView tvTitle = (TextView) view.findViewById(R.id.tv_dialog_title);
+        TextView tvSure = (TextView) view.findViewById(R.id.tv_dialog_deleteNote_sure);
+        TextView tvCancel = (TextView) view.findViewById(R.id.tv_dialog_deleteNote_cancel);
+
+        final DialogUtil dialog = new DialogUtil(AddNoteActivity.this, view);
+
+        tvTitle.setText("日记未保存，确认退出？");
+        tvSure.setText("确定");
+        tvSure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
 
@@ -121,11 +183,11 @@ public class AddNoteActivity extends BaseActivity {
     private class AddVoice implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            if (linerVoice.getVisibility() == View.GONE) {
-                linerVoice.setVisibility(View.VISIBLE);
+            if (rlRecordVoice.getVisibility() == View.GONE) {
+                rlRecordVoice.setVisibility(View.VISIBLE);
                 tvAddVoice.setText("点击取消");
             } else {
-                linerVoice.setVisibility(View.GONE);
+                rlRecordVoice.setVisibility(View.GONE);
                 tvAddVoice.setText(getResources().getString(R.string.record_voice));
             }
         }
@@ -164,7 +226,14 @@ public class AddNoteActivity extends BaseActivity {
     private class Back implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            finish();
+            if (etTitle.getText().toString().equals("") && etContent.getText().toString().equals("")) {
+                finish();
+            } else {
+                showBackDialog();
+            }
+
         }
     }
+
+
 }
