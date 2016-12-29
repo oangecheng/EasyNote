@@ -76,6 +76,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/size_interval"
                         android:layout_marginLeft="@dimen/size_interval_large"
                         android:layout_marginRight="@dimen/size_interval_large"
                         android:layout_marginBottom="@dimen/size_interval_large"
@@ -95,6 +96,15 @@
                     android:background="@drawable/shape_radius"
                     android:layout_below="@+id/ll_add_note">
 
+                    <TextView
+                        android:id="@+id/tv_start_record"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="按  住  录  音"
+                        android:textSize="@dimen/size_text"
+                        android:background="@drawable/button_click_style"/>
+
                     <ImageView
                         android:id="@+id/iv_start_record"
                         android:layout_width="30dp"
@@ -103,31 +113,57 @@
                         android:layout_marginLeft="@dimen/size_interval"
                         android:background="@mipmap/start_record"/>
 
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_play_voice"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_height"
+                    android:layout_marginLeft="@dimen/size_interval"
+                    android:layout_marginRight="@dimen/size_interval"
+                    android:layout_marginTop="@dimen/size_interval"
+                    android:background="@drawable/shape_radius"
+                    android:layout_below="@+id/rl_voice">
+
+                    <TextView
+                        android:id="@+id/tv_play_record"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textSize="@dimen/size_text"
+                        android:background="@drawable/button_click_style"/>
+
                     <ImageView
-                        android:id="@+id/iv_start_pose"
+                        android:id="@+id/iv_play_pause_record"
                         android:layout_width="26dp"
                         android:layout_height="26dp"
+                        android:layout_centerInParent="true"/>
+
+                    <ImageView
+                        android:id="@+id/iv_play_record"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/iv_start_record"
-                        android:layout_marginLeft="@dimen/size_interval_large"/>
+                        android:layout_marginLeft="@dimen/size_interval"
+                        android:background="@mipmap/start_record"/>
 
                     <TextView
                         android:id="@+id/tv_record_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/iv_start_pose"
-                        android:layout_marginLeft="@dimen/size_interval_large"
-                        android:text="00:26"/>
+                        android:layout_toRightOf="@+id/iv_play_record"
+                        android:layout_marginLeft="@dimen/size_interval"/>
 
                     <ImageView
-                        android:id="@+id/iv_end_record"
+                        android:id="@+id/iv_delete_record"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/tv_record_time"
-                        android:layout_marginLeft="@dimen/size_interval_large"
-                        android:background="@mipmap/stop"/>
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/size_interval"
+                        android:background="@mipmap/delete"/>
 
 
                 </RelativeLayout>
@@ -137,7 +173,7 @@
                     android:id="@+id/rl_11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/rl_voice"
+                    android:layout_below="@+id/rl_play_voice"
                     android:layout_marginLeft="@dimen/size_interval"
                     android:layout_marginRight="@dimen/size_interval"
                     android:layout_marginTop="@dimen/size_interval"

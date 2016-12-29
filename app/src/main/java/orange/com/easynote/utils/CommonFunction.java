@@ -51,22 +51,59 @@ public class CommonFunction {
                 String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
                 File file = new File(path);
 
-                if (file.exists()) {
+                if (!file.getAbsolutePath().contains("easynote")) {
+                    if (file.exists()) {
 //                    String parentName = file.getParentFile().getParentFile().getParentFile().getName();
 
-                    int degree = cursor.getInt(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-                    if (degree != 0) {
-                        degree = degree + 180;
-                    }
+                        int degree = cursor.getInt(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+                        if (degree != 0) {
+                            degree = degree + 180;
+                        }
 
-                    AlbumPhoto photo = new AlbumPhoto(path, 360 - degree);
-                    list.add(photo);
+                        AlbumPhoto photo = new AlbumPhoto(path, 360 - degree);
+                        list.add(photo);
+                    }
                 }
             } while (cursor.moveToNext());
 
         }
         cursor.close();
         return list;
+    }
+
+    public static String showTime(int time) {
+        int hour, minute, second;
+
+        String hh, mm, ss;
+
+        hour = time / 3600;
+        minute = (time - hour * 3600) / 60;
+        second = time - hour * 3600 - 60 * minute;
+
+        if (hour < 10) {
+            hh = "0" + hour;
+        } else {
+            hh = hour + "";
+        }
+
+        if (minute < 10) {
+            mm = "0" + minute;
+        } else {
+            mm = minute + "";
+        }
+
+        if (second < 10) {
+            ss = "0" + second;
+        } else {
+            ss = second + "";
+        }
+        String myTime = "";
+        if (hour>0){
+            myTime = hh + ":" + mm + ":" + ss;
+        }else {
+            myTime = mm + ":" + ss;
+        }
+        return myTime;
     }
 
 }

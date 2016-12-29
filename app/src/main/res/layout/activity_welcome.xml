@@ -5,13 +5,21 @@
     android:id="@+id/activity_welcome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/app_background"
     tools:context="orange.com.easynote.activity.WelcomeActivity">
 
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="300dp"
+        android:background="@mipmap/app_title"/>
+
     <TextView
-        android:id="@+id/start_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="wwwwwwwwwwww"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:text="We l c o m e"
+        android:textSize="30dp"
+        android:textColor="@color/WHITE_COMMON"
+        android:typeface="serif"/>
 
 </RelativeLayout>
