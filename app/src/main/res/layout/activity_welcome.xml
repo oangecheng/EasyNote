@@ -13,13 +13,4 @@
         android:layout_height="300dp"
         android:background="@mipmap/app_title"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="We l c o m e"
-        android:textSize="30dp"
-        android:textColor="@color/WHITE_COMMON"
-        android:typeface="serif"/>
-
 </RelativeLayout>

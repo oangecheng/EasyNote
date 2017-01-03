@@ -28,7 +28,7 @@ import orange.com.easynote.utils.DialogUtil;
 public class MainActivity extends BaseActivity {
 
     //显示分类部分
-    private LinearLayout linearLayout;
+    private RelativeLayout rlCategory;
     private ListView lvCategory;
     private TextView tvCategory;
     private FrameLayout frameLayout;
@@ -66,7 +66,7 @@ public class MainActivity extends BaseActivity {
         initView();
 
         //根据分类查看日记
-        tvCategory.setOnClickListener(new CategoryClickListener());
+        rlCategory.setOnClickListener(new CategoryClickListener());
         //添加日记
         tvAddNote.setOnClickListener(new AddNoteClickListener());
         //隐藏分类的listView
@@ -95,6 +95,7 @@ public class MainActivity extends BaseActivity {
         rlMyNote = (RelativeLayout) findViewById(R.id.rl_my_note);
         tvAllNoteCount = (TextView) findViewById(R.id.tv_all_note_count);
         tvMyNoteCount = (TextView) findViewById(R.id.tv_my_note_count);
+        rlCategory = (RelativeLayout)findViewById(R.id.tv_category_list);
 
         frameLayout.setVisibility(View.GONE);
         initList();

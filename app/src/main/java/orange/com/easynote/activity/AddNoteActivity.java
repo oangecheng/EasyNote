@@ -52,15 +52,15 @@ public class AddNoteActivity extends BaseActivity {
     protected String voicePath = "";
     private TextView tvRecordTime;
     //语音操作对象，MediaRecorder为录音，MediaPlayer为播放
-    private MediaRecorder mediaRecorder = null;
-    private MediaPlayer mediaPlayer = null;
+    protected MediaRecorder mediaRecorder = null;
+    protected MediaPlayer mediaPlayer = null;
     //判断是否为长按的标记
     private int isLongClick = 0;
     //记录开始的时间
     private long startTime = 0;
     //录音的时间长度
     private int voiceTime = 0;
-    private boolean isPlaying = true;
+    protected boolean isPlaying = true;
 
 
     @Override
@@ -155,7 +155,8 @@ public class AddNoteActivity extends BaseActivity {
         ivNote.setImageBitmap(bitmap);
     }
 
-    private void showBackDialog() {
+    //返回退出页面
+    protected void showBackDialog() {
 
         LayoutInflater inflater = LayoutInflater.from(AddNoteActivity.this);
         View view = inflater.inflate(R.layout.dialog_choice, null);
@@ -175,6 +176,42 @@ public class AddNoteActivity extends BaseActivity {
                 if (!voicePath.isEmpty()){
                     deleteVoice(voicePath);
                 }
+            }
+        });
+
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    //删除录音dialog
+    protected void showDeleteVoiceDialog() {
+
+        LayoutInflater inflater = LayoutInflater.from(AddNoteActivity.this);
+        View view = inflater.inflate(R.layout.dialog_choice, null);
+
+        TextView tvTitle = (TextView) view.findViewById(R.id.tv_dialog_title);
+        TextView tvSure = (TextView) view.findViewById(R.id.tv_dialog_deleteNote_sure);
+        TextView tvCancel = (TextView) view.findViewById(R.id.tv_dialog_deleteNote_cancel);
+
+        final DialogUtil dialog = new DialogUtil(AddNoteActivity.this, view);
+
+        tvTitle.setText("确认删除录音？");
+        tvSure.setText("确定");
+        tvSure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteVoice(voicePath);
+                voicePath = "";
+                rlPlayVoice.setVisibility(View.GONE);
+                tvAddVoice.setClickable(true);
+                tvAddVoice.setTextColor(getResources().getColor(R.color.WHITE_COMMON));
+                dialog.dismiss();
             }
         });
 
@@ -226,7 +263,7 @@ public class AddNoteActivity extends BaseActivity {
      *
      * @param path
      */
-    private void deleteVoice(String path) {
+    protected void deleteVoice(String path) {
         File file = new File(path);
         if (file.exists()) {
             file.delete();
@@ -299,7 +336,7 @@ public class AddNoteActivity extends BaseActivity {
     }
 
     //返回
-    private class Back implements View.OnClickListener {
+    protected class Back implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             if (etTitle.getText().toString().equals("") && etContent.getText().toString().equals("")
@@ -336,6 +373,7 @@ public class AddNoteActivity extends BaseActivity {
             }
 
             mediaRecorder.start();
+            tvRecordVoice.setText("正  在  录  音");
             return false;
         }
     }
@@ -357,12 +395,14 @@ public class AddNoteActivity extends BaseActivity {
                     Toast.makeText(AddNoteActivity.this, "时间太短", Toast.LENGTH_SHORT).show();
                     deleteVoice(voicePath);
                     voicePath = "";
+                    tvRecordVoice.setText("按  住  录  音");
                 }
 
                 mediaRecorder.stop();
                 mediaRecorder.release();
                 mediaRecorder = null;
                 isLongClick = 0;
+
             }
         }
     }
@@ -399,11 +439,7 @@ public class AddNoteActivity extends BaseActivity {
     private class DeleteRecord implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            deleteVoice(voicePath);
-            voicePath = "";
-            rlPlayVoice.setVisibility(View.GONE);
-            tvAddVoice.setClickable(true);
-            tvAddVoice.setTextColor(getResources().getColor(R.color.WHITE_COMMON));
+          showDeleteVoiceDialog();
         }
     }
 

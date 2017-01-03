@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import orange.com.easynote.R;
 import orange.com.easynote.enity.AlbumPhoto;
@@ -104,6 +107,21 @@ public class CommonFunction {
             myTime = mm + ":" + ss;
         }
         return myTime;
+    }
+
+    public void cachedThreadPool(){
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        for (int i=0;i<5;i++){
+            System.out.println("***************a"+i+"*********");
+        }
+        executorService.shutdown();
+    }
+
+    private class Run implements Runnable{
+        @Override
+        public void run() {
+            System.out.println(Thread.currentThread().getName()+"线程被调用了");
+        }
     }
 
 }

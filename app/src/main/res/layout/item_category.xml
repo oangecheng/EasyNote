@@ -16,7 +16,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/size_interval"
             android:text="我是测试的"
-            android:textColor="@color/BLUE_COMMON"
+            android:textColor="@color/BLACK_COMMON"
             android:textSize="@dimen/size_text"/>
 
         <TextView
@@ -27,7 +27,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/size_interval"
             android:text="6"
-            android:textColor="@color/BLUE_COMMON"
+            android:textColor="@color/BLACK_COMMON"
             android:textSize="@dimen/size_text"/>
 
     </RelativeLayout>

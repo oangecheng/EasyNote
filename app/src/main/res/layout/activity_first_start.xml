@@ -7,12 +7,4 @@
     android:layout_height="match_parent"
     tools:context="orange.com.easynote.activity.FirstStartActivity">
 
-    <TextView
-        android:id="@+id/start_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="wwwwwwwwwwww"
-        android:layout_centerInParent="true"/>
-
-
 </RelativeLayout>

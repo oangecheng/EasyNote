@@ -5,6 +5,7 @@
     android:id="@+id/activity_detail_note"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/DEFINED_GREY"
     tools:context="orange.com.easynote.activity.DetailNoteActivity">
 
     <RelativeLayout
@@ -67,7 +68,7 @@
                 android:layout_marginLeft="@dimen/size_interval"
                 android:layout_marginRight="@dimen/size_interval"
                 android:layout_marginTop="@dimen/size_interval"
-                android:background="@color/WHITE_COMMON">
+                android:background="@drawable/shape_radius">
 
                 <TextView
                     android:id="@+id/tv_detail_content"
@@ -84,14 +85,56 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_play_voice"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_height"
+                android:layout_marginLeft="@dimen/size_interval"
+                android:layout_marginRight="@dimen/size_interval"
+                android:layout_marginTop="@dimen/size_interval"
+                android:background="@drawable/shape_radius"
+                android:layout_below="@+id/rl_8">
+
+                <TextView
+                    android:id="@+id/tv_play_record"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="@dimen/size_text"
+                    android:background="@drawable/button_click_style"/>
+
+                <ImageView
+                    android:id="@+id/iv_play_pause_record"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_centerInParent="true"/>
+
+                <ImageView
+                    android:id="@+id/iv_play_record"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size_interval"
+                    android:background="@mipmap/start_record"/>
+
+                <TextView
+                    android:id="@+id/tv_record_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/iv_play_record"
+                    android:layout_marginLeft="@dimen/size_interval"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/rl_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_8"
+                android:layout_below="@+id/rl_play_voice"
                 android:layout_marginTop="@dimen/size_interval"
                 android:layout_marginLeft="@dimen/size_interval"
                 android:layout_marginRight="@dimen/size_interval"
-                android:background="@color/WHITE_COMMON">
+                android:background="@drawable/shape_radius">
 
                 <ImageView
                     android:id="@+id/iv_detail_image"
@@ -107,32 +150,10 @@
 
 
 
-
-            <RelativeLayout
-                android:id="@+id/rl_7"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_height"
-                android:layout_below="@+id/rl_10"
-                android:layout_marginLeft="@dimen/size_interval"
-                android:layout_marginRight="@dimen/size_interval"
-                android:layout_marginTop="@dimen/size_interval"
-                android:background="@drawable/shape_blueframe_whitebackground">
-
-                <TextView
-                    android:id="@+id/tv_detail_play"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="播 放 录 音"
-                    android:textColor="@color/BLUE_COMMON"
-                    android:textSize="@dimen/size_text"/>
-
-            </RelativeLayout>
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_height"
-                android:layout_below="@id/rl_7">
+                android:layout_below="@id/rl_10">
             </RelativeLayout>
 
 

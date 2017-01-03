@@ -38,7 +38,7 @@ public class WelcomeActivity extends BaseActivity {
             intent.setClass(WelcomeActivity.this, MainActivity.class);
         }
 
-        handler.sendEmptyMessageDelayed(AppConstant.MODE_0, 3000);
+        handler.sendEmptyMessageDelayed(AppConstant.MODE_0, 2000);
 
     }
 }
