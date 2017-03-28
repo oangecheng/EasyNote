@@ -249,7 +249,7 @@ public class AddNoteActivity extends BaseActivity {
      */
     private boolean checkRecordTime(long startTime) {
 
-        if (System.currentTimeMillis() - startTime > 2000) {
+        if (System.currentTimeMillis() - startTime > 1000) {
 
             //获取录音的时间长度
             voiceTime = Math.round((System.currentTimeMillis() - startTime) / 1000);
